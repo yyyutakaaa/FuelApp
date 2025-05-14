@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fuel App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-gray-50 min-h-screen flex flex-col">
+    <header class="bg-blue-600 text-white p-4 text-center font-bold text-xl">
+      Fuel App
+    </header>
+    <nav class="flex border-b border-gray-300">
+      <button
+        id="tab-calc"
+        class="flex-1 p-3 text-center bg-white font-semibold border-b-2 border-blue-600"
+      >
+        Berekenen
+      </button>
+      <button
+        id="tab-history"
+        class="flex-1 p-3 text-center bg-gray-100 hover:bg-gray-200"
+      >
+        Geschiedenis
+      </button>
+    </nav>
+
+    <main class="flex-grow p-4 max-w-lg mx-auto w-full">
+      <section id="section-calc">
+        <form id="calc-form" class="space-y-4 text-gray-800">
+          <div>
+            <label for="start-location" class="block mb-1 font-semibold"
+              >Vertreklocatie</label
+            >
+            <div class="flex">
+              <input
+                type="text"
+                id="start-location"
+                name="start-location"
+                placeholder="Adres of 
+plaats"
+                class="flex-grow rounded border px-3 py-2"
+                required
+              />
+              <button
+                type="button"
+                id="btn-get-location"
+                class="ml-2 px-3 rounded bg-blue-600 text-white hover:bg-blue-700"
+              >
+                Locatie
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <label for="end-location" class="block mb-1 font-semibold"
+              >Eindbestemming</label
+            >
+            <input
+              type="text"
+              id="end-location"
+              name="end-location"
+              placeholder="Adres of plaats"
+              class="w-full rounded border px-3 py-2"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="consumption" class="block mb-1 font-semibold"
+              >Gemiddeld verbruik (L/100km)</label
+            >
+            <input
+              type="number"
+              id="consumption"
+              name="consumption"
+              min="0"
+              step="0.1"
+              placeholder="Bijv. 6.5"
+              class="w-full rounded border px-3 py-2"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="fuel-price" class="block mb-1 font-semibold"
+              >Brandstofprijs (€/L) - optioneel</label
+            >
+            <input
+              type="number"
+              id="fuel-price"
+              name="fuel-price"
+              min="0"
+              step="0.01"
+              placeholder="Bijv. 1.75"
+              class="w-full rounded border px-3 py-2"
+            />
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              class="w-full bg-blue-600 text-white rounded py-3 font-semibold hover:bg-blue-700"
+            >
+              Bereken
+            </button>
+          </div>
+
+          <p id="error-msg" class="text-red-600 font-semibold mt-2 hidden"></p>
+        </form>
+
+        <div id="result-card" class="mt-6 bg-white p-4 rounded shadow hidden">
+          <h2 class="font-bold text-lg mb-2">Resultaat</h2>
+          <p><strong>Afstand:</strong> <span id="distance-km">--</span> km</p>
+          <p><strong>Verbruik:</strong> <span id="fuel-used">--</span> liter</p>
+          <p><strong>Kostprijs:</strong> € <span id="cost-price">--</span></p>
+        </div>
+      </section>
+
+      <section id="section-history" class="hidden">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="font-bold text-lg">Geschiedenis</h2>
+          <button
+            id="btn-clear-history"
+            class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+          >
+            Wis geschiedenis
+          </button>
+        </div>
+        <ul id="history-list" class="space-y-2 text-gray-900"></ul>
+        <p id="history-empty" class="text-gray-500 italic">
+          Geen vorige zoekopdrachten gevonden.
+        </p>
+      </section>
+    </main>
+
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>
